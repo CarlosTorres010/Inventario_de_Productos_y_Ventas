@@ -72,8 +72,30 @@ void listarProductos(Producto articulo[], int cantidadProductos){
 	}
 }
 
-//void buscarproducto
+void buscarProducto(Producto articulo[], int cantidadProductos, const string& nombre){ 
+        
+		bool confirmacion = false; 
+        
+        cout<<"BUSCANDO EL PRODUCTO...\n"; 
+	 	for(int i=0; i<cantidadProductos; ++i){
+	 		if(articulo[i].nombre == nombre){
+	 			
+	 			cout<<"Producto: "<<i+1<<" | "<<" -> "<<"INDICE: "<<i<<endl; 
+ 				cout<<"Nombre del producto: "<<articulo[i].nombre<<endl;
+ 				cout<<"Precio: "<<articulo[i].precio<<endl;
+				cout<<"\n";
+				
+				confirmacion = true; 
+				
+		 		break; 
+ 	        }
+         }
+ 	        if (confirmacion == false){
+    	        cout<<"\nEl contacto con el nombre '"<<nombre<<"' no fue encontrado.\n";
+   		    }
+}
 
+// void actualizarProducto
 int main(){
 	Producto articulo[limite_productos];
  	Venta    vent[limite_productos];
@@ -104,7 +126,16 @@ int main(){
    		        case 2: 
 	      	    listarProductos(articulo, cantidadProductos); 
 	      	    break;
-	      	    //case 3: 
+	      	    case 3: {
+   		         string nombre; 
+	      	     cout<<"\nDigite el nombre del producto a buscar: "; 
+	      	     cin.ignore(); 
+	      	     getline(cin, nombre); 
+	      	     
+       	         buscarProducto(articulo, cantidadProductos, nombre); 
+   		        break; 
+   		        } 
+   		        //case 4: 
    		      
    		      
    		        default: break; 
