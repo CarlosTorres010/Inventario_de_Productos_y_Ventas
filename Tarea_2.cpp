@@ -55,7 +55,24 @@ void registrarProducto(Producto articulo[], int &cantidadProductos){
 	
 	cout<<"Producto registrado satisfacoriamente! \n";	 
 }
-// void listarProductos 
+
+void listarProductos(Producto articulo[], int cantidadProductos){
+	if(cantidadProductos == 0){
+		cout<<"No se han registrado productos hasta el momento. \n";
+	}
+	else{
+		cout<<"Listando productos...\n"<<endl;	
+ 	   for(int i=0; i<cantidadProductos; ++i){
+ 	   	cout<<"Producto: "<<i+1<<" | "<<" -> "<<"Indice: "<<i<<endl; 
+ 		cout<<"Nombre del producto: "<<articulo[i].nombre<<endl;
+ 		cout<<"Precio: "<<articulo[i].precio<<endl;
+		cout<<"\n";
+		 
+ 	   }
+	}
+}
+
+//void buscarproducto
 
 int main(){
 	Producto articulo[limite_productos];
@@ -84,6 +101,10 @@ int main(){
    		        case 1: 
        	        registrarProducto(articulo, cantidadProductos); 
    		        break; 
+   		        case 2: 
+	      	    listarProductos(articulo, cantidadProductos); 
+	      	    break;
+	      	    //case 3: 
    		      
    		      
    		        default: break; 
