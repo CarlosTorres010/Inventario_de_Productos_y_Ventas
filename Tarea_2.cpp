@@ -24,6 +24,7 @@ S: Salir del programa.
 using namespace std;
 
 const int limite_productos = 50; 
+const int limite_ventas=50; 
 
 struct Producto{
   string nombre;
@@ -111,13 +112,64 @@ void actualizarProducto(Producto articulo[], int cantidadProductos, int indice){
 	cout<<"Producto actualizado satisfactoriamente! \n";
 }
 
-// void eliminarProducto
+void eliminarProducto(Producto articulo[], int &cantidadProductos, int indice){
+     if(indice<0 || indice>=cantidadProductos){
+	 	cout<<"El indice ingresado no es valido. "; 	
+		 return;
+     }
+	 
+	 for(int i=indice; i<cantidadProductos-1; ++i){
+	 	articulo[i]=articulo[i+1]; 
+	 }
+	 
+	 cantidadProductos--; 
+	 
+	 cout<<"\nEl producto fue eliminado satisfactoriamente!\n "; 
+}
+
+void registrarVenta(Venta vent[], Producto articulo[], int cantidadProductos, int &cantidadVentas) {
+    if (cantidadVentas >= limite_ventas) {
+        cout << "Ya no queda espacio suficiente para registrar más ventas.\n";
+        return;
+    }
+
+    Venta venta;
+    cout <<"Ingrese el nombre del producto vendido: ";
+    cin.ignore();
+    getline(cin, venta.producto);
+    
+    bool confirmacion = false;
+    for (int i = 0; i < cantidadProductos; ++i) {
+        if (articulo[i].nombre == venta.producto) {
+            confirmacion = true;
+            venta.precioTotal = articulo[i].precio;
+            break;
+        }
+    }
+
+    if (confirmacion = false) {
+        cout << "El producto no existe. No se puede registrar la venta.\n";
+        return;
+    }
+
+    cout << "Ingrese la cantidad vendida: ";
+    cin >> venta.cantidad;
+    venta.precioTotal *= venta.cantidad;
+    venta.idVenta = cantidadVentas + 1;
+
+    vent[cantidadVentas] = venta;
+    cantidadVentas++;
+	cout << "Venta registrada satisfacctoriamente!\n";
+}
+	
+// void listarVentas 
 
 int main(){
 	Producto articulo[limite_productos];
- 	Venta    vent[limite_productos];
+ 	Venta    vent[limite_ventas];
   	int opcion; 
    	int cantidadProductos = 0; 
+   	int cantidadVentas= 0;
    	int indice;
       
       do{
@@ -159,8 +211,18 @@ int main(){
 				actualizarProducto(articulo, cantidadProductos, indice); 			  	    
    		        break;
 			    }
-   		        //case 5: 
-   		      
+   		        case 5:{
+  	  		    cout<<"Ingrese el indice del producto que desea eliminar. ";
+				cin>>indice; 
+	      	    eliminarProducto(articulo, cantidadProductos, indice); 
+   		      	break;
+   		        }  
+   		        case 6:{   		     			 
+				registrarVenta(vent, articulo, cantidadProductos, cantidadVentas); 
+				break;
+				}
+   		      	// case 7: 
+   		      	
    		        default: break; 
           	}
        }while(opcion != 9);
