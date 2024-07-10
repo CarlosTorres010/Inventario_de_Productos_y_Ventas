@@ -252,7 +252,10 @@ int main(){
    		        totalVentas(vent, cantidadVentas); 
    		        break;
    		        
-   		        //case 9: 
+   		        case 9:{
+      		  	cout<<"Saliendo del programa..."<<endl; 
+      		  	break;
+      		    }
    		        
    		        default: break; 
           	}
